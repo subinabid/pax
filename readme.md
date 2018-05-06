@@ -19,7 +19,7 @@ This will create the required directories and the `manage.py` file
 
 
 ### App -  add view
-In polls/view.py , add the code
+In `polls/view.py` , add the code
 
 ```Python
 from django.http import HttpResponse
@@ -29,7 +29,7 @@ def index(request):
 ```
 
 ### App - URLs
-In polls/urls.py , add the code
+Create a a file `polls/urls.py` and add the code
 
 ```Python
 from django.urls import path
@@ -38,5 +38,17 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+]
+```
+
+Similarly, in `project/urls.py` add the code
+
+```python
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('polls/', include('polls.urls')),
+    path('admin/', admin.site.urls),
 ]
 ```
