@@ -52,3 +52,30 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 ```
+### Database
+By default, django uses SQLite, which takes care of itself.
+
+I made an attempt to host my app on Redhat's Openshift, which uses a django + PostgreSQL combination. I will figure it out later.
+
+### Time zones
+Default time zone is American. I haven't figured out how to change it to Indian time zone. Read some docs which says its as simple as going to `project/settings.py` and changing `TIME_ZONE = 'UTC'` to `TIME_ZONE = 'IN'`. But didn't work for me.
+
+### Models
+Models defines the database layouts
+
+in `polls/models.py`, add the following code:
+
+```Python
+from django.db import models
+
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+```
