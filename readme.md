@@ -79,3 +79,14 @@ class Choice(models.Model):
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 ```
+
+### Add our app to the django app list
+Add our app (polls) to `INSTALLED_APPS` section of `project/settings.py`. The documentation says I should add `'polls.apps.PollsConfig',`. Simply adding `'polls',` would work fine as well.
+
+Run `python manage.py makemigrations polls` to tell pyhton about the new Models
+
+Run `python manage.py migrate` to apply changes to the database
+
+### A bit about Git
+
+I have been using github for desktop for a  while, but decided to try the CLI instead. By the time you add your models, django starts generating its own files in `__pycache__` folder. I guess I need not add those files in `git add`. But everytime i use `git status`, it lists a few untracked files, which is irritating.  need to figure out how to get rid of those!
