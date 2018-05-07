@@ -90,3 +90,7 @@ Run `python manage.py migrate` to apply changes to the database
 ### A bit about Git
 
 I have been using github for desktop for a  while, but decided to try the CLI instead. By the time you add your models, django starts generating its own files in `__pycache__` folder. I guess I need not add those files in `git add`. But every time I use `git status`, it lists a few untracked files, which is irritating. I need to figure out how to get rid of those!
+
+### Markdown syntax formatting
+
+while using ``` ``` to highlight code, we specify the language use to format the code. ```Python ``` does not work the same way as ```python ```. The latter is what we want. I learned is the hard way.
