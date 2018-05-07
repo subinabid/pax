@@ -94,3 +94,9 @@ I have been using github for desktop for a  while, but decided to try the CLI in
 ### Markdown syntax formatting
 
 while using ````  ``` ``` ````  to highlight code, we specify the language use to format the code. ```` ```Python ``` ```` does not work the same way as```` ```python ``` ````. The latter is what we want. I learned this the hard way.
+
+### Creating an admin
+
+Run `python manage.py createsuperuser` to create an admin. django will ask for a username, email id and password.
+
+I always wondered where django stores the username and password. Apparently,its in the same database. `git status` indicates that the database has been changed. I am a bit confused here - should I include the database in my `git add` or not? Since I do not know the answer for sure, I am adding it anyway! I am also trying to hold my OCD to `git push` after every commit.    
