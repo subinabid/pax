@@ -21,7 +21,7 @@ This will create the required directories and the `manage.py` file
 ### App -  add view
 In `polls/view.py` , add the code
 
-```Python
+```python
 from django.http import HttpResponse
 
 def index(request):
@@ -31,7 +31,7 @@ def index(request):
 ### App - URLs
 Create a a file `polls/urls.py` and add the code
 
-```Python
+```python
 from django.urls import path
 
 from . import views
@@ -65,7 +65,7 @@ Models defines the database layouts
 
 in `polls/models.py`, add the following code:
 
-```Python
+```python
 from django.db import models
 
 
@@ -89,4 +89,4 @@ Run `python manage.py migrate` to apply changes to the database
 
 ### A bit about Git
 
-I have been using github for desktop for a  while, but decided to try the CLI instead. By the time you add your models, django starts generating its own files in `__pycache__` folder. I guess I need not add those files in `git add`. But everytime i use `git status`, it lists a few untracked files, which is irritating.  need to figure out how to get rid of those!
+I have been using github for desktop for a  while, but decided to try the CLI instead. By the time you add your models, django starts generating its own files in `__pycache__` folder. I guess I need not add those files in `git add`. But every time I use `git status`, it lists a few untracked files, which is irritating. I need to figure out how to get rid of those!
