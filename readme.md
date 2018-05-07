@@ -93,4 +93,4 @@ I have been using github for desktop for a  while, but decided to try the CLI in
 
 ### Markdown syntax formatting
 
-while using ```  \`\`\` \`\`\`  ```  to highlight code, we specify the language use to format the code. ``` \`\`\`Python \`\`\` ``` does not work the same way as``` \`\`\`python \`\`\` ```. The latter is what we want. I learned is the hard way.
+while using ```  \`\`\` \`\`\`  ```  to highlight code, we specify the language use to format the code. ``` \`\`\`Python \`\`\` ``` does not work the same way as``` \```python \``` ```. The latter is what we want. I learned is the hard way.
