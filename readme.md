@@ -52,6 +52,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 ```
+
+This adds a proper URL to our app. By default, django shows a beautiful index page with a rocket when the project is initiated. When we edit the `urls.py`, the beautiful index file wont be visible anymore. The system throws a 404 when you try `localhost:8000`. Hence forth, we will have to visit `localhost:8000/polls` to see the dirty view we created some time ago, or `localhost:8000/admin` to see the admin page. username and password for the admin page will be handled later
+
 ### Database
 By default, django uses SQLite, which takes care of itself.
 
@@ -99,4 +102,4 @@ while using ````  ``` ``` ````  to highlight code, we specify the language use t
 
 Run `python manage.py createsuperuser` to create an admin. django will ask for a username, email id and password.
 
-I always wondered where django stores the username and password. Apparently,its in the same database. `git status` indicates that the database has been changed. I am a bit confused here - should I include the database in my `git add` or not? Since I do not know the answer for sure, I am adding it anyway! I am also trying to hold my OCD to `git push` after every commit.    
+I always wondered where django stores the username and password. Apparently, its in the same database. `git status` indicates that the database has been changed. I am a bit confused here - should I include the database in my `git add` or not? Since I do not know the answer for sure, I am adding it anyway! I am also trying to hold my OCD to `git push` after every commit.    
