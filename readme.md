@@ -25,7 +25,7 @@ In `polls/view.py` , add the code
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index")
+    return HttpResponse("Hello, world. This is the boring page you will see when you request the polls page. we haven't reached the template part of tutorial yet!")
 ```
 
 ### App - URLs
@@ -103,3 +103,16 @@ while using ````  ``` ``` ````  to highlight code, we specify the language use t
 Run `python manage.py createsuperuser` to create an admin. django will ask for a username, email id and password.
 
 I always wondered where django stores the username and password. Apparently, its in the same database. `git status` indicates that the database has been changed. I am a bit confused here - should I include the database in my `git add` or not? Since I do not know the answer for sure, I am adding it anyway! I am also trying to hold my OCD to `git push` after every commit.    
+
+### Make the app database (model) accessible through the admin access
+
+In `polls/admin.py`, add the code
+
+```python
+from django.contrib import admin
+
+from .models import Question
+
+admin.site.register(Question)
+
+```
