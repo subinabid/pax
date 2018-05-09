@@ -96,7 +96,7 @@ I have been using github for desktop for a  while, but decided to try the CLI in
 
 ### Markdown syntax formatting
 
-while using ````  ``` ``` ````  to highlight code, we specify the language use to format the code. ```` ```Python ``` ```` does not work the same way as```` ```python ``` ````. The latter is what we want. I learned this the hard way.
+while using ````  ``` ``` ````  to highlight code, we specify the language to format the code. ```` ```Python ``` ```` does not work the same way as```` ```python ``` ````. The latter is what we want. I learned this the hard way.
 
 ### Creating an admin
 
@@ -114,5 +114,4 @@ from django.contrib import admin
 from .models import Question
 
 admin.site.register(Question)
-
 ```
