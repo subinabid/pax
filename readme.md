@@ -153,3 +153,33 @@ urlpatterns = [
 you can check http://localhost:8000/polls/100/
 
 ### I am trying to make the views actually do something instead of returning a predetermined text.
+
+Modify `index` in `polls/views.py` as below, leaving the rest unchanged.
+
+```python
+from django.http import HttpResponse
+from .models import Question
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    output = ', '.join([q.question_text for q in latest_question_list])
+    return HttpResponse(output)
+```
+
+http://localhost:8000/polls/ actually displays the questions. But we need to make it look better
+
+### Introducing templates
+inside polls folder, create sub folders `templates/polls` and put an `index.html` file in it
+`polls/templates/polls/index.html`
+
+```python
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+```
