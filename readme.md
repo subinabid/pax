@@ -329,3 +329,61 @@ def results(request, question_id):
 ```
 
 PS: Read about `avoiding race condition using F()` later
+
+### Generic Views
+
+Django has built in views to do basic display like showing date from a db. Lets modify `urls.py` and `views.py` to use generic views.
+
+`urls.py`
+```python
+from django.urls import path
+
+from . import views
+
+app_name = 'polls'
+urlpatterns = [
+    path('', views.IndexView.as_view(), name='index'),
+    path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+    path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
+    path('<int:question_id>/vote/', views.vote, name='vote'),
+]
+
+note:  **<question_id>** is changed to **<pk>**
+```
+
+`views.py`
+```python
+rom django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+from django.views import generic
+
+from .models import Choice, Question
+
+
+class IndexView(generic.ListView):
+    template_name = 'polls/index.html'
+    context_object_name = 'latest_question_list'
+
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return Question.objects.order_by('-pub_date')[:5]
+
+
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = 'polls/detail.html'
+
+
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'polls/results.html'
+
+
+def vote(request, question_id):
+    ... # same as above, no changes needed.
+```
+
+We’re using two generic views here: **ListView** and **DetailView**
+
+PS: read `generic view documentation` later 
