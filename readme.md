@@ -183,3 +183,66 @@ inside polls folder, create sub folders `templates/polls` and put an `index.html
     <p>No polls are available.</p>
 {% endif %}
 ```
+
+update `polls/views.py`
+
+```python
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Question
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list,}
+    return render(request,'polls/index.html',context)
+```
+
+for handling details page, add a `detail.html`
+```python
+{{ question }}
+```
+
+make the changes in `polls/views.html` also
+```python
+from django.http import Http404
+from django.shortcuts import render
+
+from .models import Question
+# ...
+def detail(request, question_id):
+    try:
+        question = Question.objects.get(pk=question_id)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'polls/detail.html', {'question': question})
+```
+
+It works! I assume `{{question}}` displays only the question text because of
+```python
+def __str__(self):
+      return self.question_text
+```
+in the model.py
+
+### Removing hard coded URLS in index templates
+
+Replace
+```python
+<li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+```
+
+with
+
+```python
+<li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+```
+
+`detail` is already defined in `urls.py`
+
+### namespacing
+
+In case there are multiple `detail` URLS across different apps in a project, to make it explicit, include `app_name = 'polls'` in `urls.py` and modify thge template as:
+
+```python
+<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+```
