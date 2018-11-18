@@ -386,4 +386,18 @@ def vote(request, question_id):
 
 We’re using two generic views here: **ListView** and **DetailView**
 
-PS: read `generic view documentation` later 
+PS: read `generic view documentation` later
+
+### Static files
+
+Static files like css and js should be put in `polls/static/polls` folder. All requied files can be added here (eg css, js, images, etc)This is similar to what we do for template files.
+
+For the templates to use these files, add the following to template files
+
+ ```python
+ {% load static %}
+
+ <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+ ```
+
+`python manage.py runserver` has to be run again to restart the server to account for static files, even if `debug` is on.
