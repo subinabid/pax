@@ -401,3 +401,68 @@ For the templates to use these files, add the following to template files
  ```
 
 `python manage.py runserver` has to be run again to restart the server to account for static files, even if `debug` is on.
+
+
+### Customizing admin pages
+
+In many cases, we will have to change the way admin page display data.
+
+modify `admin.py` as :
+
+```python
+from django.contrib import admin
+
+from .models import Question, Choice
+
+class QuestionAdmin(admin.ModelAdmin):
+    fields = ['pub_date', 'question_text']
+
+admin.site.register(Question, QuestionAdmin)
+admin.site.register(Choice)
+```
+
+A class `QuestionAdmin` is defined ans ia passed as the 2nd arguement to the `register` function, to modify the default display style
+
+When large number of fields are present, the same may be categorized into groups
+
+```python
+class QuestionAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None,               {'fields': ['question_text']}),
+        ('Date information', {'fields': ['pub_date']}),
+    ]
+```
+
+Its better to display the choices along with the questions. Modify as:
+``` python
+from django.contrib import admin
+
+from .models import Choice, Question
+
+
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    extra = 3
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None,               {'fields': ['question_text']}),
+        ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
+    ]
+    inlines = [ChoiceInline]
+
+admin.site.register(Question, QuestionAdmin)
+```
+
+`extra = 3` is for 3 choices
+
+### customizing admin change list
+
+By default, Django displays the **str()** of each object. But sometimes it’d be more helpful if we could display individual fields. To do that, use the list_display admin option, which is a tuple of field names to display, as columns, on the change list page for the object:
+
+```python
+class QuestionAdmin(admin.ModelAdmin):
+    # ...
+    list_display = ('question_text', 'pub_date')
+```
